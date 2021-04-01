@@ -1,0 +1,54 @@
+.slideContainer {
+    width: 75%;
+    margin-top: 20px;
+    
+}
+.slideContainer:hover{
+        box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.205);
+        opacity: 0.7;
+    
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+}
+.slider-text{
+        writing-mode: vertical-rl; 
+        box-shadow: 0px 10px 10px 1px rgb(230,230,230);
+        text-align: center;
+        transform: rotate(180deg);
+}
+.slider{
+        max-width: 10px;
+         -webkit-appearance: slider-vertical;
+        opacity: 0.7;
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+        block-size: 200px;
+        border-radius: 12px; 
+}
+    
+.slider:hover {
+        opacity: 1;
+        box-shadow: 0px 10px 10px 1px rgb(230,230,230);
+}
+    
+.output {
+    writing-mode: horizontal-tb; 
+    text-align: center;
+    transform: rotate(180deg);
+
+}
+
+.slider::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.noselect {
+        -webkit-touch-callout: none; /* iOS Safari */
+          -webkit-user-select: none; /* Safari */
+           -khtml-user-select: none; /* Konqueror HTML */
+             -moz-user-select: none; /* Old versions of Firefox */
+              -ms-user-select: none; /* Internet Explorer/Edge */
+                  user-select: none; /* Non-prefixed version, currently
+                                        supported by Chrome, Edge, Opera and Firefox */
+}
