@@ -22,8 +22,7 @@ snareButton.addEventListener("click", () => {
 
     const snareOscillator = audioContext.createOscillator();
     snareOscillator.type = "triangle";
-    snareOscillator.frequency.setValueAtTime(100, audioContext.currentTime);
-    snareOscillator.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+    snareOscillator.frequency.setValueAtTime(170, audioContext.currentTime);
 
     const oscillatorGain = audioContext.createGain();
     oscillatorGain.gain.setValueAtTime(1, audioContext.currentTime);

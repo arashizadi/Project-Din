@@ -13,10 +13,9 @@ kickButton.addEventListener("click", () => {
     kickGainControl.gain.setValueAtTime(kickChannel.value ,0);
     kickGainControl.gain.exponentialRampToValueAtTime(0.005, audioContext.currentTime + 0.5);
     kickOsscillator.connect(kickGainControl);
-    
     kickGainControl.connect(primaryGainControl);
     kickOsscillator.start();
-    kickOsscillator.stop(audioContext.currentTime+0.1);
+    kickOsscillator.stop(audioContext.currentTime+0.5);
 });
 document.body.appendChild(kickButton);
 
