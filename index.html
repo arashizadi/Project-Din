@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,56 +8,25 @@
     <title>Project Din</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
+
 <body>
+
     <div class="noselect">
-
-    <div class="slideContainer">
-        <label class="slider-text" for="masterChannel">
-            <output class="masterChannel-output output" for="masterChannel"></output>
-            Master Channel 
-        </label>
-        <input class="slider" type="range" min="0" max="1.27" value="1" step="0.01" name="" id="masterChannel">
-
-        <label class="slider-text" for="noteChannel">
-            <output class="noteChannel-output output" for="noteChannel"></output>
-            Synth Channel 
-        </label>
-        <input class="slider" type="range" min="0" max="1.27" value="1" step="0.01" name="" id="noteChannel">
-
-        <label class="slider-text" for="whiteNoiseChannel">
-            <output class="whiteNoiseChannel-output output" for="whiteNoiseChannel"></output>
-            White-Noise Channel 
-        </label>
-        <input class="slider" type="range" min="0" max="1.27" value="1" step="0.01" name="" id="whiteNoiseChannel">
-
-        <label class="slider-text" for="kickChannel">
-            <output class="kickChannel-output output" for="kickChannel"></output>
-            Kick Channel 
-        </label>
-        <input class="slider" type="range" min="0" max="1.27" value="1" step="0.01" name="" id="kickChannel">
-
-        <label class="slider-text" for="snareChannel">
-            <output class="snareChannel-output output" for="snareChannel"></output>
-            Snare Channel 
-        </label>
-        <input class="slider" type="range" min="0" max="1.27" value="1" step="0.01" name="" id="snareChannel">
-
-        <label class="slider-text" for="hihatChannel">
-            <output class="hihatChannel-output output" for="hihatChannel"></output>
-            Hi-hat Channel 
-        </label>
-        <input class="slider" type="range" min="0" max="1.27" value="1" step="0.01" name="" id="hihatChannel">
-
+        <div class="slideContainer" id="slideContainer">
+        <!--
+            JS DOM
+        -->
+        </div>
     </div>
-</div>
 </body>
+<script>
 
+</script>
 <script src="master_channel.js"></script>
 <script src="synth.js"></script>
-
 <script src="whitenoise.js"></script>
-<script src="whitenoise_snare.js"></script>
 <script src="whitenoise_kick.js"></script>
+<script src="whitenoise_snare.js"></script>
 <script src="hihat_sample.js"></script>
 
 </html>

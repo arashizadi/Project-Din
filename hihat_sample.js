@@ -23,6 +23,36 @@ hihatSourse.start();
 
 document.body.appendChild(hihatButton);
 
+function createHihatChannel() {
+  let output = document.createElement("output");
+  output.classList.add("hihatChannel-output");
+  output.classList.add("output");
+  output.setAttribute("for", "hihatChannel");
+  let outputText = document.createTextNode("100");
+  output.appendChild(outputText);
+
+  let label = document.createElement("label");
+  label.classList.add("slider-text");
+  label.setAttribute("for", "hihatChannel");
+  let labelText = document.createTextNode(" Hi-hat Channel ");
+  label.appendChild(output);
+  label.appendChild(labelText);
+
+  let input = document.createElement("input");
+  input.classList.add("slider");
+  input.setAttribute("type", "range");
+  input.min = "0";
+  input.max = "1.27";
+  input.value = "1";
+  input.step = "0.01";
+  input.id = "hihatChannel";
+
+  let element = document.getElementById("slideContainer");
+  element.appendChild(label);
+  element.appendChild(input);
+}
+createHihatChannel();
+
 const hihatChannel = document.querySelector('#hihatChannel');
 const hihatOutput = document.querySelector('.hihatChannel-output');
 

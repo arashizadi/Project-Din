@@ -20,6 +20,36 @@ kickButton.addEventListener("click", () => {
 });
 document.body.appendChild(kickButton);
 
+function createKickChannel() {
+  let output = document.createElement("output");
+  output.classList.add("kickChannel-output");
+  output.classList.add("output");
+  output.setAttribute("for", "kickChannel");
+  let outputText = document.createTextNode("100");
+  output.appendChild(outputText);
+
+  let label = document.createElement("label");
+  label.classList.add("slider-text");
+  label.setAttribute("for", "kickChannel");
+  let labelText = document.createTextNode(" Kick Channel ");
+  label.appendChild(output);
+  label.appendChild(labelText);
+
+  let input = document.createElement("input");
+  input.classList.add("slider");
+  input.setAttribute("type", "range");
+  input.min = "0";
+  input.max = "1.27";
+  input.value = "1";
+  input.step = "0.01";
+  input.id = "kickChannel";
+
+  let element = document.getElementById("slideContainer");
+  element.appendChild(label);
+  element.appendChild(input);
+}
+createKickChannel();
+
 const kickChannel = document.querySelector('#kickChannel');
 const kickOutput = document.querySelector('.kickChannel-output');
 

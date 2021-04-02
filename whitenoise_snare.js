@@ -35,6 +35,36 @@ snareButton.addEventListener("click", () => {
 });
 document.body.appendChild(snareButton);
 
+function createSnareChannel() {
+  let output = document.createElement("output");
+  output.classList.add("snareChannel-output");
+  output.classList.add("output");
+  output.setAttribute("for", "snareChannel");
+  let outputText = document.createTextNode("100");
+  output.appendChild(outputText);
+
+  let label = document.createElement("label");
+  label.classList.add("slider-text");
+  label.setAttribute("for", "snareChannel");
+  let labelText = document.createTextNode(" Snare Channel ");
+  label.appendChild(output);
+  label.appendChild(labelText);
+
+  let input = document.createElement("input");
+  input.classList.add("slider");
+  input.setAttribute("type", "range");
+  input.min = "0";
+  input.max = "1.27";
+  input.value = "1";
+  input.step = "0.01";
+  input.id = "snareChannel";
+
+  let element = document.getElementById("slideContainer");
+  element.appendChild(label);
+  element.appendChild(input);
+}
+createSnareChannel();
+
 const snareChannel = document.querySelector('#snareChannel');
 const snareOutput = document.querySelector('.snareChannel-output');
 
