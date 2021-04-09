@@ -1,5 +1,6 @@
 const noteGainControl = audioContext.createGain();
 var duration = 4;
+var poly = 5;
 var _synthType = [];
 var _selectedType = [];
 const noteOscillator = [];
@@ -13,6 +14,7 @@ for (let i = 0; i < buffer.length; i++) {
     LchannelData[i] = Math.random() * 2 - 1;
     RchannelData[i] = Math.random() * 2 - 1;
 }
+
 
 const notes = [
     { note: "C", frequency: 261.63 },
@@ -35,31 +37,28 @@ document.body.appendChild(document.createElement('br'));
 notes.forEach(({ note, frequency }) => {
     document.querySelector("#noteChannel");
 
-const noteButton = document.createElement('button');
+    const noteButton = document.createElement('button');
     noteButton.classList.add("noselect");
     noteButton.innerText = note;
     noteButton.addEventListener("click", () => {
+        for (let i = 0; i < poly; i++) {
 
-        _synthType[0] = document.getElementById("synthType" + 1);
-        _selectedType[0] = _synthType[0].selectedIndex;
-        noteOscillator[0] = audioContext.createOscillator();
-        noteOscillator[0].type = _synthType[0].options[_selectedType[0]].text.toLowerCase();
-        noteOscillator[0].frequency.setValueAtTime(frequency, audioContext.currentTime);
+            _synthType[i] = document.getElementById("synthType" + 1);
+            _selectedType[i] = _synthType[i].selectedIndex;
+            noteOscillator[i] = audioContext.createOscillator();
+            noteOscillator[i].type = _synthType[i].options[_selectedType[i]].text.toLowerCase();
 
-        noteGainControl.gain.setValueAtTime(noteChannel.value/12, 0);
-        noteOscillator[0].connect(noteGainControl);
-        noteGainControl.connect(primaryGainControl);
-        noteOscillator[0].start();
-        noteOscillator[0].stop(audioContext.currentTime + duration);
+            if (i == 0)
+                noteOscillator[i].frequency.setValueAtTime(frequency, audioContext.currentTime);
+            else
+                noteOscillator[i].frequency.setValueAtTime(frequency * 1.5 * i, audioContext.currentTime);
 
-        noteOscillator[1] = audioContext.createOscillator();
-        noteOscillator[1].type = _synthType[1].options[_selectedType[1]].text.toLowerCase();
-        noteOscillator[1].frequency.setValueAtTime(frequency * 1.5, audioContext.currentTime);
-
-        noteOscillator[1].connect(noteGainControl);
-        noteGainControl.connect(primaryGainControl);
-        noteOscillator[1].start();
-        noteOscillator[1].stop(audioContext.currentTime + duration);
+            noteGainControl.gain.setValueAtTime(noteChannel.value / 6 * poly, 0);
+            noteOscillator[i].connect(noteGainControl);
+            noteGainControl.connect(primaryGainControl);
+            noteOscillator[i].start();
+            noteOscillator[i].stop(audioContext.currentTime + duration);
+        }
     })
     document.body.appendChild(noteButton);
 })
@@ -94,7 +93,7 @@ function createSynthChannel() {
 
     let dropdown = document.createElement("select");
     dropdown.setAttribute("ID", "synthType" + 1);
-    
+
     let ddOne = document.createElement("option");
     let ddOneText = document.createTextNode("Sine");
     ddOne.appendChild(ddOneText);
@@ -106,7 +105,7 @@ function createSynthChannel() {
     let ddThree = document.createElement("option");
     let ddThreeText = document.createTextNode("Square");
     ddThree.appendChild(ddThreeText);
-   
+
     let ddFour = document.createElement("option");
     let ddFourText = document.createTextNode("Sawtooth");
     ddFour.appendChild(ddFourText);
@@ -127,6 +126,6 @@ const noteOutput = document.querySelector(".noteChannel-output");
 noteChannel.textContent = noteChannel.value * 100;
 
 noteChannel.addEventListener('input', function () {
-    noteGainControl.gain.setValueAtTime(noteChannel.value/6, 0);
+    noteGainControl.gain.setValueAtTime(noteChannel.value / 6, 0);
     noteOutput.textContent = parseInt(noteChannel.value * 100);
 });
