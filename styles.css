@@ -1,3 +1,7 @@
+body {
+background-color: black;
+color:ghostwhite;
+}
 .slideContainer {
     width: 75%;
     margin-top: 20px;
@@ -32,11 +36,24 @@
 }
     
 .output {
-    writing-mode: horizontal-tb; 
-    text-align: center;
-    transform: rotate(180deg);
+        writing-mode: horizontal-tb; 
+        text-align: center;
+        transform: rotate(180deg);
+    
+    }
+.output0 {
+        writing-mode: horizontal-tb; 
+        text-align: center;
+        transform: rotate(180deg);
+    
+    }
 
-}
+    .output1 {
+        writing-mode: horizontal-tb; 
+        text-align: center;
+        transform: rotate(180deg);
+    
+    } 
 
 .slider::-webkit-slider-thumb{
     -webkit-appearance: none;
