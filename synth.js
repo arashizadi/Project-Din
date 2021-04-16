@@ -1,10 +1,11 @@
 const noteGainControl = audioContext.createGain();
 var duration = 4;
 var poly = 5;
+var interval = 1.5;
 var _synthType = [];
 var _selectedType = [];
 const noteOscillator = [];
-const buffer = audioContext.createBuffer(2, audioContext.sampleRate * duration, audioContext.sampleRate);
+var buffer = audioContext.createBuffer(2, audioContext.sampleRate * duration, audioContext.sampleRate);
 
 const LchannelData = buffer.getChannelData(0);
 const RchannelData = buffer.getChannelData(1);
@@ -51,9 +52,9 @@ notes.forEach(({ note, frequency }) => {
             if (i == 0)
                 noteOscillator[i].frequency.setValueAtTime(frequency, audioContext.currentTime);
             else
-                noteOscillator[i].frequency.setValueAtTime(frequency * 1.5 * i, audioContext.currentTime);
+                noteOscillator[i].frequency.setValueAtTime(frequency * interval * i, audioContext.currentTime);
 
-            noteGainControl.gain.setValueAtTime(noteChannel.value / 6 * poly, 0);
+            noteGainControl.gain.setValueAtTime(noteChannel.value / (6 * poly), 0);
             noteOscillator[i].connect(noteGainControl);
             noteGainControl.connect(primaryGainControl);
             noteOscillator[i].start();
@@ -64,6 +65,45 @@ notes.forEach(({ note, frequency }) => {
 })
 
 function createSynthChannel() {
+    let durationInput = document.createElement("input");
+    durationInput.value = 4;
+    durationInput.size = 1;
+    durationInput.setAttribute("type", "text");
+    durationInput.setAttribute("class", "durationSynth");
+    let durationLabel = document.createElement("label");
+    durationLabel.setAttribute("for", durationInput);
+    let durationLabelText = document.createTextNode("\xA0Duration:\xA0");
+    durationLabel.appendChild(durationLabelText);
+    durationInput.appendChild(durationLabel);
+    document.body.appendChild(durationLabel);
+    document.body.appendChild(durationInput);
+
+    let polyInput = document.createElement("input");
+    polyInput.value = 5;
+    polyInput.size = 1;
+    polyInput.setAttribute("type", "text");
+    polyInput.setAttribute("class", "polySynth");
+    let polyLabel = document.createElement("label");
+    polyLabel.setAttribute("for", polyInput);
+    let polyLabelText = document.createTextNode("\xA0Poly:\xA0");
+    polyLabel.appendChild(polyLabelText);
+    polyInput.appendChild(polyLabel);
+    document.body.appendChild(polyLabel);
+    document.body.appendChild(polyInput);
+
+    let polyIntervalInput = document.createElement("input");
+    polyIntervalInput.value = 1.5;
+    polyIntervalInput.size = 1;
+    polyIntervalInput.setAttribute("type", "text");
+    polyIntervalInput.setAttribute("class", "polyIntervalSynth");
+    let polyIntervalLabel = document.createElement("label");
+    polyIntervalLabel.setAttribute("for", polyIntervalInput);
+    let polyIntervalLabelText = document.createTextNode("\xA0Interval:\xA0");
+    polyIntervalLabel.appendChild(polyIntervalLabelText);
+    polyIntervalInput.appendChild(polyIntervalLabel);
+    document.body.appendChild(polyIntervalLabel);
+    document.body.appendChild(polyIntervalInput);
+
     let output = document.createElement("output");
     output.classList.add("noteChannel-output");
     output.classList.add("output");
@@ -93,6 +133,7 @@ function createSynthChannel() {
 
     let dropdown = document.createElement("select");
     dropdown.setAttribute("ID", "synthType" + 1);
+    let dropdownLabelText = document.createTextNode("\xA0Waveform:\xA0");
 
     let ddOne = document.createElement("option");
     let ddOneText = document.createTextNode("Sine");
@@ -114,6 +155,8 @@ function createSynthChannel() {
     dropdown.appendChild(ddTwo);
     dropdown.appendChild(ddThree);
     dropdown.appendChild(ddFour);
+    dropdown.appendChild(dropdownLabelText);
+    document.body.appendChild(dropdownLabelText);
     document.body.appendChild(dropdown);
 }
 createSynthChannel();
@@ -126,6 +169,21 @@ const noteOutput = document.querySelector(".noteChannel-output");
 noteChannel.textContent = noteChannel.value * 100;
 
 noteChannel.addEventListener('input', function () {
-    noteGainControl.gain.setValueAtTime(noteChannel.value / 6, 0);
+    noteGainControl.gain.setValueAtTime(noteChannel.value / (6 * poly), 0);
     noteOutput.textContent = parseInt(noteChannel.value * 100);
+});
+
+const durSynth = document.querySelector(".durationSynth");
+durSynth.addEventListener('input', function () {
+        duration = parseInt(durSynth.value);
+});
+
+const polSynth = document.querySelector(".polySynth");
+polSynth.addEventListener('input', function () {
+        poly = parseInt(polSynth.value);
+});
+
+const polIntSynth = document.querySelector(".polyIntervalSynth");
+polIntSynth.addEventListener('input', function () {
+        interval = parseFloat(polIntSynth.value);
 });
