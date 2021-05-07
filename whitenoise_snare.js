@@ -32,6 +32,7 @@ snareButton.addEventListener("click", () => {
     snareOscillator.start();
     snareOscillator.stop(audioContext.currentTime + 0.2);
 });
+snareButton.setAttribute("Id", "snareButton");
 document.body.appendChild(snareButton);
 
 function createSnareChannel() {

@@ -18,19 +18,30 @@ for (let i = 0; i < buffer.length; i++) {
 
 
 const notes = [
-    { note: "C", frequency: 261.63 },
-    { note: "C#", frequency: 277.18 },
-    { note: "D", frequency: 293.66 },
-    { note: "D#", frequency: 311.13 },
-    { note: "E", frequency: 329.63 },
-    { note: "F", frequency: 349.23 },
-    { note: "F#", frequency: 369.99 },
-    { note: "G", frequency: 392.0 },
-    { note: "G#", frequency: 415.3 },
-    { note: "A", frequency: 440.0 },
-    { note: "A#", frequency: 466.16 },
-    { note: "B", frequency: 493.88 },
-    { note: "C", frequency: 523.25 },
+    { note: "C 4", frequency: 261.63 },
+    { note: "C# 4", frequency: 277.18 },
+    { note: "D 4", frequency: 293.66 },
+    { note: "D# 4", frequency: 311.13 },
+    { note: "E 4", frequency: 329.63 },
+    { note: "F 4", frequency: 349.23 },
+    { note: "F# 4", frequency: 369.99 },
+    { note: "G 4", frequency: 392.0 },
+    { note: "G# 4", frequency: 415.3 },
+    { note: "A 4", frequency: 440.0 },
+    { note: "A# 4", frequency: 466.16 },
+    { note: "B 4", frequency: 493.88 },
+    { note: "C 5", frequency: 523.25 },
+    { note: "C# 5", frequency: 554.37 },
+    { note: "D 5", frequency: 587.33 },
+    { note: "D# 5", frequency: 622.25 },
+    { note: "E 5", frequency: 659.25 },
+    { note: "F 5", frequency: 698.46 },
+    { note: "F# 5", frequency: 739.99 },
+    { note: "G 5", frequency: 783.99 },
+    { note: "G# 5", frequency: 830.61 },
+    { note: "A 5", frequency: 880.00 },
+    { note: "A# 5", frequency: 932.33 },
+    { note: "B 5", frequency: 987.77 },
 ];
 document.body.classList.add("noselect");
 document.body.appendChild(document.createElement('br'));
@@ -41,6 +52,7 @@ notes.forEach(({ note, frequency }) => {
     const noteButton = document.createElement('button');
     noteButton.classList.add("noselect");
     noteButton.innerText = note;
+    noteButton.setAttribute("Id", note);
     noteButton.addEventListener("click", () => {
         for (let i = 0; i < poly; i++) {
 
@@ -98,7 +110,7 @@ function createSynthChannel() {
     polyIntervalInput.setAttribute("class", "polyIntervalSynth");
     let polyIntervalLabel = document.createElement("label");
     polyIntervalLabel.setAttribute("for", polyIntervalInput);
-    let polyIntervalLabelText = document.createTextNode("\xA0Interval:\xA0");
+    let polyIntervalLabelText = document.createTextNode("\xA0Chord Scale:\xA0");
     polyIntervalLabel.appendChild(polyIntervalLabelText);
     polyIntervalInput.appendChild(polyIntervalLabel);
     document.body.appendChild(polyIntervalLabel);

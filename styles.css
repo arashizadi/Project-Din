@@ -41,19 +41,6 @@ color:ghostwhite;
         transform: rotate(180deg);
     
     }
-.output0 {
-        writing-mode: horizontal-tb; 
-        text-align: center;
-        transform: rotate(180deg);
-    
-    }
-
-    .output1 {
-        writing-mode: horizontal-tb; 
-        text-align: center;
-        transform: rotate(180deg);
-    
-    } 
 
 .slider::-webkit-slider-thumb{
     -webkit-appearance: none;

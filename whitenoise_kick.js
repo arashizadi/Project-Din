@@ -17,6 +17,7 @@ kickButton.addEventListener("click", () => {
     kickOsscillator.start();
     kickOsscillator.stop(audioContext.currentTime+0.5);
 });
+kickButton.setAttribute("Id", "kickButton");
 document.body.appendChild(kickButton);
 
 function createKickChannel() {

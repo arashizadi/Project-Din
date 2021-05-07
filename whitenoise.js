@@ -13,6 +13,7 @@ whiteNoiseButton.addEventListener("click", () => {
     whiteNoiseGainControl.connect(primaryGainControl);
     whiteNoiseSource.start();
 });
+whiteNoiseButton.setAttribute("Id", "whiteNoiseButton");
 document.body.appendChild(whiteNoiseButton);
 
 
