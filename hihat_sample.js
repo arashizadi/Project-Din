@@ -20,6 +20,7 @@ hihatGainControl.connect(primaryGainControl);
 hihatSourse.start();
 });
 hihatButton.setAttribute("Id", "hihatButton");
+hihatButton.style.display = "none";
 document.body.appendChild(hihatButton);
 
 function createHihatChannel() {

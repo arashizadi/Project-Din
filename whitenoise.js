@@ -14,6 +14,7 @@ whiteNoiseButton.addEventListener("click", () => {
     whiteNoiseSource.start();
 });
 whiteNoiseButton.setAttribute("Id", "whiteNoiseButton");
+whiteNoiseButton.style.display = "none";
 document.body.appendChild(whiteNoiseButton);
 
 
