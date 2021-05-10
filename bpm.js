@@ -1,12 +1,19 @@
 let beat = Array(16);
 let beatInterval = Array(17);
-let bpm;
+let currentBeat;
+
+let beatTag = document.createElement("p");
+beatTag.setAttribute("Id", "beat");
+let beatText = document.createTextNode("");
+beatTag.appendChild(beatText);
+document.body.appendChild(beatTag);
 
 function Timer(callback, timeInterval) {
     this.timeInterval = timeInterval;
 
     this.start = () => {
         this.expected = Date.now() + this.timeInterval;
+        currentBeat = 0;
         this.timeout = setTimeout(this.round, this.timeInterval);
         console.log("Started");
     }
@@ -27,32 +34,90 @@ function changeBPM(_bpm) {
     for (let b = 0; b < beatInterval.length; b++) {
         beatInterval[b] = b*15000/bpm;
         console.log(beatInterval[b]);
+        updatePlaylist();   
     }
 }
 
 
 
 
-const kickBPM = new Timer(() => {document.getElementById("kickButton").click()}, 500);
-const snareBPM = new Timer(() => {document.getElementById("snareButton").click()}, 1000);
-const hihatBPM = new Timer(() => {document.getElementById("hihatButton").click()}, 250);
+let kickBPM = new Timer(() => {document.getElementById("kickButton").click()}, beatInterval[16]);
 
+let update = new Timer(() => {count()}, beatInterval[1]);
+
+function updatePlaylist() {
+    kickBPM = new Timer(() => {document.getElementById("kickButton").click()}, beatInterval[16]);
+    update = new Timer(() => {count()}, beatInterval[1]);
+}
 function startDrumBPM() {
     kickBPM.start();
-    snareBPM.start();
-    hihatBPM.start();
+    update.start();
 }
 
 function stopDrumBPM() {
     kickBPM.stop();
-    snareBPM.stop();
-    hihatBPM.stop();
+    update.stop();
 }
 
+function count() {
+    if (currentBeat >= beatInterval[15]) {
+        currentBeat = 0;
+    }
+    else
+        currentBeat+= beatInterval[1];
+    document.getElementById("beat").innerHTML = "Beat: " + (currentBeat/beatInterval[1] + 1);
+}
 
-
-
-
-function map(value, minA, maxA, minB, maxB) {
-    return (1 - ((value - minA) / (maxA - minA))) * minB + ((value - minA) / (maxA - minA)) * maxB;
+function pattern(){
+    switch(currentBeat/beatInterval[1] + 1) {
+    case 1:
+    //play every instrument that has the block enabled
+      break;
+        case 2:
+    //play every instrument that has the block enabled
+      break;
+    case 3:
+    //play every instrument that has the block enabled
+      break;
+    case 4:
+    //play every instrument that has the block enabled
+      break;
+    case 5:
+    //play every instrument that has the block enabled
+      break;
+    case 6:
+    //play every instrument that has the block enabled
+      break;
+    case 7:
+    //play every instrument that has the block enabled
+      break;
+    case 8:
+    //play every instrument that has the block enabled
+      break;
+    case 9:
+    //play every instrument that has the block enabled
+      break;
+    case 10:
+    //play every instrument that has the block enabled
+      break;
+    case 11:
+    //play every instrument that has the block enabled
+      break;
+    case 12:
+    //play every instrument that has the block enabled
+      break;
+    case 13:
+    //play every instrument that has the block enabled
+      break;
+    case 14:
+    //play every instrument that has the block enabled
+      break;
+    case 15:
+    //play every instrument that has the block enabled
+      break;
+    case 16:
+    //play every instrument that has the block enabled
+      break;
+  }
+  
 }
