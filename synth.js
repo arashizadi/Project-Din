@@ -50,7 +50,9 @@ function createSynthChannel() {
     let durationInput = document.createElement("input");
     durationInput.value = 4;
     durationInput.size = 1;
-    durationInput.setAttribute("type", "text");
+    durationInput.setAttribute("onfocusout", "focusoutDurSynth()");
+    durationInput.setAttribute("type", "number");
+    durationInput.setAttribute("min", "1");
     durationInput.setAttribute("class", "durationSynth");
     let durationLabel = document.createElement("label");
     durationLabel.setAttribute("for", durationInput);
@@ -63,7 +65,10 @@ function createSynthChannel() {
     let polyInput = document.createElement("input");
     polyInput.value = 5;
     polyInput.size = 1;
-    polyInput.setAttribute("type", "text");
+    polyInput.setAttribute("onfocusout", "focusoutPolSynth()");
+    polyInput.setAttribute("type", "number");
+    polyInput.setAttribute("step", "1");
+    polyInput.setAttribute("min", "1");
     polyInput.setAttribute("class", "polySynth");
     let polyLabel = document.createElement("label");
     polyLabel.setAttribute("for", polyInput);
@@ -76,7 +81,10 @@ function createSynthChannel() {
     let polyIntervalInput = document.createElement("input");
     polyIntervalInput.value = 1.5;
     polyIntervalInput.size = 1;
-    polyIntervalInput.setAttribute("type", "text");
+    polyIntervalInput.setAttribute("onfocusout", "focusoutPolInt()");
+    polyIntervalInput.setAttribute("type", "number");
+    polyIntervalInput.setAttribute("step", "0.01");
+    polyIntervalInput.setAttribute("min", "0.01");
     polyIntervalInput.setAttribute("class", "polyIntervalSynth");
     let polyIntervalLabel = document.createElement("label");
     polyIntervalLabel.setAttribute("for", polyIntervalInput);
@@ -152,17 +160,14 @@ notes.forEach(({ note, frequency }) => {
     noteButton.style.visibility = "hidden";
     noteButton.addEventListener("click", () => {
         for (let i = 0; i < poly; i++) {
-
             _synthType[i] = document.getElementById("synthType" + 1);
             _selectedType[i] = _synthType[i].selectedIndex;
             noteOscillator[i] = audioContext.createOscillator();
             noteOscillator[i].type = _synthType[i].options[_selectedType[i]].text.toLowerCase();
-
             if (i == 0)
                 noteOscillator[i].frequency.setValueAtTime(frequency, audioContext.currentTime);
             else
                 noteOscillator[i].frequency.setValueAtTime(frequency * interval * i, audioContext.currentTime);
-
             noteGainControl.gain.setValueAtTime(noteChannel.value / (6 * poly), 0);
             noteOscillator[i].connect(noteGainControl);
             noteGainControl.connect(primaryGainControl);
@@ -186,15 +191,42 @@ noteChannel.addEventListener('input', function () {
 
 const durSynth = document.querySelector(".durationSynth");
 durSynth.addEventListener('input', function () {
-        duration = parseInt(durSynth.value);
+    if (durSynth.value == "" || parseFloat(durSynth.value) < 0)
+    duration = duration;
+    else
+        duration = parseFloat(durSynth.value);
 });
+
+function focusoutDurSynth(){
+    const durSynth = document.querySelector(".durationSynth");
+    if (durSynth.value == "" || parseFloat(durSynth.value) < 0)
+    durSynth.value = duration;
+}
 
 const polSynth = document.querySelector(".polySynth");
 polSynth.addEventListener('input', function () {
-        poly = parseInt(polSynth.value);
+    if (polSynth.value == "" || parseFloat(polSynth.value) < 1)
+        poly = poly;
+    else
+        poly = parseFloat(polSynth.value);
 });
+
+function focusoutPolSynth(){
+    const polSynth = document.querySelector(".polySynth");
+    if (polSynth.value == "" || parseFloat(polSynth.value) < 1)
+    polSynth.value = Math.abs(poly);
+}
 
 const polIntSynth = document.querySelector(".polyIntervalSynth");
 polIntSynth.addEventListener('input', function () {
+    if (polIntSynth.value == "")
+        interval = interval;
+    else
         interval = parseFloat(polIntSynth.value);
 });
+
+function focusoutPolInt(){
+    const polIntSynth = document.querySelector(".polyIntervalSynth");
+    if (polIntSynth.value == "" || parseFloat(polIntSynth.value) <= 0)
+        polIntSynth.value = Math.abs(interval);
+}

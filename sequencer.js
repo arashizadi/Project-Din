@@ -1,6 +1,6 @@
 const sequencer = document.createElement("TABLE");
-const tableRows = new Array(29);
-for (let i = 0; i < tableRows.length; i++) {
+const lines = new Array(28);
+for (let i = 0; i < lines.length+1; i++) {
     const tr = document.createElement("TR");
     const th = document.createElement("TH");
     th.classList.add("button");
@@ -119,7 +119,7 @@ for (let i = 0; i < tableRows.length; i++) {
             btn.innerText = "Synth B5";
             break;
         case 28:
-            btn.setAttribute("onclick", "document.getElementById('B 5').click()");
+            btn.setAttribute("onclick", "playToggle()");
             btn.setAttribute("Id", "playback");
             btn.setAttribute("style", "align-items: center;");
             btn.innerText = "Play";
@@ -127,14 +127,14 @@ for (let i = 0; i < tableRows.length; i++) {
     }
     th.appendChild(btn);
     if (i == 28)
-    th.innerHTML += "<label for='bpm'>\xA0\xA0\xA0BPM\xA0</label><input style='display: inline-block;'type='text' id='bpm' name='bpm' value=120 size = 1>"
-
+    th.innerHTML += "<label for='bpm'>\xA0\xA0\xA0BPM\xA0</label><input style='display: inline-block;'type='number' onfocusout='focusoutBpm()' min='0' id='bpm' name='bpm' value=120 size = 1>";
     tr.appendChild(th);
     for (let j = 0; j < beats.length; j++) {
         const td = document.createElement("TD");
         td.classList.add("checkbox");
         const inpt = document.createElement("input");
         inpt.setAttribute("type", "checkbox");
+        inpt.setAttribute("onclick", "changePattern("+j+", "+i+")");
         if (i == 0)
             inpt.setAttribute("Id", "kick" + j);
         else if (i == 1)
@@ -194,12 +194,27 @@ for (let i = 0; i < tableRows.length; i++) {
         else if (i == 28) {
             inpt.setAttribute("Id", "beat" + j);
             inpt.disabled = true;
+            inpt.style.display = "None";
         }
+        if (i != 28){
         td.appendChild(inpt);
         tr.appendChild(td)
+        }
+    }
+    if (i == 28){
+        for (let j = 0; j < beats.length; j++) {
+            const td = document.createElement("TD");
+            const h1 = document.createElement("H1");
+            h1.setAttribute("Id", "bar-"+(j+1));
+            if(j < 9)
+            h1.textContent="0"+(j+1);
+            else
+            h1.textContent=j+1;
+            td.appendChild(h1);
+            tr.appendChild(td);
+        }
     }
     sequencer.appendChild(tr);
 }
 document.body.appendChild(sequencer);
 
-sequencer.innerHTML += "<th></th><th><h1 style='text-align: center;'>1</h1></th><th><h1 style='text-align: center;'>2</h1></th><th><h1 style='text-align: center;'>3</h1></th><th><h1 style='text-align: center;'>4</h1></th><th><h1 style='text-align: center;'>5</h1></th><th><h1 style='text-align: center;'>6</h1></th><th><h1 style='text-align: center;'>7</h1></th><th><h1 style='text-align: center;'>8</h1></th><th><h1 style='text-align: center;'>9</h1></th><th><h1 style='text-align: center;'>10</h1></th><th><h1 style='text-align: center;'>11</h1></th><th><h1 style='text-align: center;'>12</h1></th><th><h1 style='text-align: center;'>13</h1></th><th><h1 style='text-align: center;'>14</h1></th><th><h1 style='text-align: center;'>15</h1></th><th><h1 style='text-align: center;'>16</h1></th></tr>"

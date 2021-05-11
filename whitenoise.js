@@ -8,10 +8,11 @@ whiteNoiseButton.innerText = "White Noise";
 whiteNoiseButton.addEventListener("click", () => {
     const whiteNoiseSource = audioContext.createBufferSource();
     whiteNoiseSource.buffer = buffer;
-    whiteNoiseGainControl.gain.setValueAtTime(whiteNoiseChannel.value/6, 0);
+    whiteNoiseGainControl.gain.setValueAtTime(whiteNoiseChannel.value/10, 0);
     whiteNoiseSource.connect(whiteNoiseGainControl);
     whiteNoiseGainControl.connect(primaryGainControl);
     whiteNoiseSource.start();
+    whiteNoiseSource.stop(audioContext.currentTime + duration);
 });
 whiteNoiseButton.setAttribute("Id", "whiteNoiseButton");
 whiteNoiseButton.style.display = "none";
@@ -53,6 +54,6 @@ const whiteNoiseOutput = document.querySelector('.whiteNoiseChannel-output');
 
 whiteNoiseOutput.textContent = whiteNoiseChannel.value * 100;
 whiteNoiseChannel.addEventListener('input', function() {
-    whiteNoiseGainControl.gain.setValueAtTime(whiteNoiseChannel.value/6, 0);
+    whiteNoiseGainControl.gain.setValueAtTime(whiteNoiseChannel.value/10, 0);
     whiteNoiseOutput.textContent = parseInt(whiteNoiseChannel.value * 100);
 });whiteNoiseChannel

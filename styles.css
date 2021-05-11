@@ -2,6 +2,18 @@ body {
 background-color: black;
 color:ghostwhite;
 }
+h1{
+        text-align: center;
+        align-items: center;
+        border:thick;
+        border-color:rgba(0, 0, 0, 0.205);
+        border-radius: 10%;
+        border-style:outset;
+        width:inherit;
+}
+.highlighted{
+        border-color:darkslategray;
+}
 table{
         width: 100%;
         align-content: center;
@@ -97,6 +109,7 @@ input[type=checkbox]:enabled{
         cursor: pointer;
         
 }
+
 input[type="checkbox"]:disabled + label::before{
         background: gray;
         cursor:default;
@@ -116,6 +129,11 @@ input[type=range]{
 }
 input[type=text]{
 font-size: 20px;
+}
+input[type=number]{
+        font-size: 20px;
+        width: 60px;
+        max-width: 100px;
 }
 
 button {
