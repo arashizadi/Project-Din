@@ -119,6 +119,7 @@ for (let i = 0; i < lines.length+1; i++) {
             btn.innerText = "Synth B5";
             break;
         case 28:
+            th.setAttribute("Id", "transport");
             btn.setAttribute("onclick", "playToggle()");
             btn.setAttribute("Id", "playback");
             btn.setAttribute("style", "align-items: center;");
@@ -132,6 +133,7 @@ for (let i = 0; i < lines.length+1; i++) {
     for (let j = 0; j < beats.length; j++) {
         const td = document.createElement("TD");
         td.classList.add("checkbox");
+        td.setAttribute("Id", "beat_"+(j+1));
         const inpt = document.createElement("input");
         inpt.setAttribute("type", "checkbox");
         inpt.setAttribute("onclick", "changePattern("+j+", "+i+")");
