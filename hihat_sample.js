@@ -58,6 +58,6 @@ const hihatOutput = document.querySelector('.hihatChannel-output');
 
 hihatOutput.textContent = hihatChannel.value * 100;
 hihatChannel.addEventListener('input', function() {
-    whiteNoiseGainControl.gain.setValueAtTime(hihatChannel.value/6, 0);
+    hihatGainControl.gain.setValueAtTime(hihatChannel.value/6, 0);
     hihatOutput.textContent = parseInt(hihatChannel.value * 100);
 });hihatChannel
